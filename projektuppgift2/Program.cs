@@ -1,11 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 namespace projektuppgift2
 {
     class Program
     {
         static void Main(string[] args)
-        {      
+        {
             int menu1 = 0;
             while (menu1 != 4)
             {
@@ -13,7 +14,22 @@ namespace projektuppgift2
                 menu1 = int.Parse(Console.ReadLine());
                 if (menu1 == 1)
                 {
-
+                    string[] Test = new string[6];
+                    {
+                        Test[0] = "Hi1";
+                        Test[1] = "Hi2";
+                        Test[2] = "Hi3";
+                        Test[3] = "Hi4";
+                        Test[4] = "Hi5";
+                        Test[5] = "Hi6";
+                    }
+                    File.WriteAllLines("TestFile.txt", Test);
+                    string[] Filecontent = File.ReadAllLines("TestFile.txt");
+                    foreach (string Line in Filecontent)
+                    {
+                        Console.WriteLine(Line);
+                    }
+                    Console.WriteLine();
                 }
                 else if (menu1 == 2)
                 {

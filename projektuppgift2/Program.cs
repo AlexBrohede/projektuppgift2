@@ -13,7 +13,7 @@ namespace projektuppgift2
             {              
                 if (File.Exists("TestFile.txt"))
                 {
-                    Console.WriteLine($"1: Test File sys \n2: Manage text \n3: ??? \n4: Reset \n5: stop");
+                    Console.WriteLine($"1: Test File sys \n2: Manage text \n3: Search for song \n4: Reset \n5: stop");
                     menu1 = int.Parse(Console.ReadLine());
                     if (menu1 == 1)
                     {
@@ -34,7 +34,22 @@ namespace projektuppgift2
                     }
                     else if (menu1 == 3)
                     {
-
+                        int count = 0;
+                        Console.WriteLine("Type to search...");
+                        string search = Console.ReadLine().ToLower();
+                        string[] Filecontent = File.ReadAllLines("TestFile.txt");
+                        foreach  (string song in Filecontent)
+                        {
+                            if (song.ToLower().Contains(search))
+                            {
+                                count++;
+                                Console.WriteLine(song + $"Song nr {count}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Couldn't find any songs...");
+                            }
+                        }
                     }
                     else if (menu1 == 4)
                     {

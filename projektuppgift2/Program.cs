@@ -34,6 +34,7 @@ namespace projektuppgift2
                     }
                     else if (menu1 == 3)
                     {
+                        bool find = false;
                         int count = 0;
                         Console.WriteLine("Type to search...");
                         string search = Console.ReadLine().ToLower();
@@ -42,14 +43,16 @@ namespace projektuppgift2
                         {
                             if (song.ToLower().Contains(search))
                             {
-                                count++;
-                                Console.WriteLine(song + $"Song nr {count}");
+                                Console.WriteLine(song + $", Song nr {count + 1}");
+                                find = true;
                             }
-                            else
-                            {
-                                Console.WriteLine("Couldn't find any songs...");
-                            }
+                            count++;
                         }
+                        if (find == false)
+                        {
+                            Console.WriteLine("Couldn't find any songs...");
+                        }
+
                     }
                     else if (menu1 == 4)
                     {

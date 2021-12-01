@@ -7,90 +7,105 @@ namespace projektuppgift2
     {
         static void Main(string[] args)
         {
-            string[] Test = new string[6];
+            int SongCount;
+            
             int menu1 = 0;
             while (menu1 != 5)
-            {              
-                if (File.Exists("TestFile.txt"))
+            {
+                if (File.Exists("CountFile.txt"))
                 {
-                    Console.WriteLine($"1: Test File sys \n2: Manage text \n3: Search for song \n4: Reset \n5: stop");
-                    menu1 = int.Parse(Console.ReadLine());
-                    if (menu1 == 1)
+                    SongCount = int .Parse(File.ReadAllText("CountFile.txt"));
+                    string[] Test = new string[SongCount];
+                    if (File.Exists("TestFile.txt"))
                     {
-                        string[] Filecontent = File.ReadAllLines("TestFile.txt");
-                        foreach (string Line in Filecontent)
+                        Console.WriteLine($"1: View toplist \n2: Change list \n3: Search for a song \n4: Reset list \n5: stop");
+                        menu1 = int.Parse(Console.ReadLine());
+                        if (menu1 == 1)
                         {
-                            Console.WriteLine(Line);
-                        }
-                        Console.WriteLine();
-                    }
-                    else if (menu1 == 2)
-                    {
-                        Console.WriteLine($"Choose array position \n1-6");
-                        int ArrayPosition = int.Parse(Console.ReadLine());
-                        Console.WriteLine($"Change text in position {ArrayPosition}");
-                        Test[ArrayPosition - 1] = Console.ReadLine();
-                        File.WriteAllLines("TestFile.txt", Test);
-                    }
-                    else if (menu1 == 3)
-                    {
-                        bool find = false;
-                        int count = 0;
-                        Console.WriteLine("Type to search...");
-                        string search = Console.ReadLine().ToLower();
-                        string[] Filecontent = File.ReadAllLines("TestFile.txt");
-                        foreach  (string song in Filecontent)
-                        {
-                            if (song.ToLower().Contains(search))
+                            string[] Filecontent = File.ReadAllLines("TestFile.txt");
+                            foreach (string Line in Filecontent)
                             {
-                                Console.WriteLine(song + $", Song nr {count + 1}");
-                                find = true;
+                                Console.WriteLine(Line);
                             }
-                            count++;
+                            Console.WriteLine();
                         }
-                        if (find == false)
+                        else if (menu1 == 2)
                         {
-                            Console.WriteLine("Couldn't find any songs...");
+                            Console.WriteLine($"Choose placement \n1-{SongCount}");
+                            int ArrayPosition = int.Parse(Console.ReadLine());
+                            Console.WriteLine($"Type to change {ArrayPosition}");
+                            Test[ArrayPosition - 1] = Console.ReadLine();
+                            File.WriteAllLines("TestFile.txt", Test);
                         }
+                        else if (menu1 == 3)
+                        {
+                            bool find = false;
+                            int count = 0;
+                            Console.WriteLine("Type to search...");
+                            string search = Console.ReadLine().ToLower();
+                            string[] Filecontent = File.ReadAllLines("TestFile.txt");
+                            foreach (string song in Filecontent)
+                            {
+                                if (song.ToLower().Contains(search))
+                                {
+                                    Console.WriteLine(song + $", Song nr {count + 1}");
+                                    find = true;
+                                }
+                                count++;
+                            }
+                            if (find == false)
+                            {
+                                Console.WriteLine("Couldn't find any songs...");
+                            }
 
-                    }
-                    else if (menu1 == 4)
-                    {
-                        {
-                            Test[0] = "Hi1";
-                            Test[1] = "Hi2";
-                            Test[2] = "Hi3";
-                            Test[3] = "Hi4";
-                            Test[4] = "Hi5";
-                            Test[5] = "Hi6";
                         }
-                        File.WriteAllLines("TestFile.txt", Test);
-                    }
-                    else if (menu1 == 5)
-                    {
-                        Console.WriteLine($"Stopping the simulation");
-                        Thread.Sleep(1500);
+                        else if (menu1 == 4)
+                        {
+                            {
+                                SongCount = 6;
+                            }
+                            File.WriteAllText("CountFile.txt", SongCount.ToString());
+                            for (int i = 0; i < SongCount; i++)
+                            {
+                                Test[i] = "Empty";
+                            }
+                            File.WriteAllLines("TestFile.txt", Test);
+                            
+                        }
+                        else if (menu1 == 5)
+                        {
+                            Console.WriteLine($"Stopping the simulation");
+                            Thread.Sleep(1500);
+                        }
+                        else if (menu1 == 6)
+                        {
+                            //Test or De bug command
+                            Console.WriteLine(SongCount + "\nNew Count");
+                            SongCount = int.Parse(Console.ReadLine());
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("That was not an option \nPress any key to pick again");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
                     }
                     else
                     {
-                        Console.Clear();
-                        Console.WriteLine("That was not an option \nPress any key to pick again");
-                        Console.ReadKey();
-                        Console.Clear();
+                        for (int i = 0; i < SongCount; i++)
+                        {
+                            Test[i] = "Empty";
+                        }
+                        File.WriteAllLines("TestFile.txt", Test);
                     }
                 }
                 else
                 {
-                    {
-                        Test[0] = "Hi1";
-                        Test[1] = "Hi2";
-                        Test[2] = "Hi3";
-                        Test[3] = "Hi4";
-                        Test[4] = "Hi5";
-                        Test[5] = "Hi6";
-                    }
-                    File.WriteAllLines("TestFile.txt", Test);
+                    SongCount = 6;     
                 }
+                File.WriteAllText("CountFile.txt", SongCount.ToString());
+
             }
         }
     }

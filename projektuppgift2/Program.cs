@@ -83,6 +83,26 @@ namespace projektuppgift2
                             Console.WriteLine(SongCount + "\nNew Count");
                             SongCount = int.Parse(Console.ReadLine());
                         }
+                        else if (menu1 == 420)
+                        {
+                            int xzy = 0;
+                            while (xzy != 1337)
+                            {
+                                xzy = int.Parse(Console.ReadLine());
+                                Console.Clear();
+                                for (int i = 0; i < Console.WindowHeight; i++)
+                                {
+                                    for (int i1 = 0; i1 < Console.WindowWidth; i1++)
+                                    {
+                                        Console.Write("¤");
+                                    }
+                                    Console.WriteLine();
+                                }
+                            }
+                                
+                            
+                        }
+
                         else
                         {
                             Console.Clear();
